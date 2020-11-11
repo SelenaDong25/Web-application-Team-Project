@@ -21,7 +21,7 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Item", b =>
                 {
-                    b.Property<int>("item_id")
+                    b.Property<int>("itemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -32,20 +32,20 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("poll_id")
+                    b.Property<int>("pollId")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
+                    b.Property<int>("userId")
                         .HasColumnType("int");
 
-                    b.HasKey("item_id");
+                    b.HasKey("itemId");
 
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Poll", b =>
                 {
-                    b.Property<int>("poll_id")
+                    b.Property<int>("pollId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -62,31 +62,31 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.Property<int>("user_id")
                         .HasColumnType("int");
 
-                    b.HasKey("poll_id");
+                    b.HasKey("pollId");
 
                     b.ToTable("Polls");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Vote", b =>
                 {
-                    b.Property<int>("item_id")
+                    b.Property<int>("itemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("poll_id")
+                    b.Property<int>("pollId")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
+                    b.Property<int>("userId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("vote_date_time")
+                    b.Property<DateTime>("voteDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("voter_id")
                         .HasColumnType("int");
 
-                    b.HasKey("item_id");
+                    b.HasKey("itemId");
 
                     b.ToTable("Votes");
                 });
