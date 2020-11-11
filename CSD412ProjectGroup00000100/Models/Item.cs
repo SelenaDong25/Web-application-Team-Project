@@ -10,6 +10,7 @@ namespace CSD412ProjectGroup00000100.Models
     {
         private int _item_id;
         private int _poll_id;
+        private int _user_id;
         private string _name;
         private String _description;
         [Key]
@@ -23,6 +24,11 @@ namespace CSD412ProjectGroup00000100.Models
         {
             get { return _poll_id; }
             set { _poll_id = value; }
+        }
+        public int user_id
+        {
+            get { return _user_id; }
+            set { _user_id = value; }
         }
         public String name
         {
