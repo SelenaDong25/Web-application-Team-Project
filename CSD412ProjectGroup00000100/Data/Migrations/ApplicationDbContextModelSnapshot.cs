@@ -35,6 +35,9 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.Property<int>("poll_id")
                         .HasColumnType("int");
 
+                    b.Property<int>("user_id")
+                        .HasColumnType("int");
+
                     b.HasKey("item_id");
 
                     b.ToTable("Items");
@@ -79,6 +82,9 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
 
                     b.Property<DateTime>("vote_date_time")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("voter_id")
+                        .HasColumnType("int");
 
                     b.HasKey("item_id");
 
