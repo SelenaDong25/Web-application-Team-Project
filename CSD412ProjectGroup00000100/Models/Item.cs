@@ -8,37 +8,37 @@ namespace CSD412ProjectGroup00000100.Models
 {
     public class Item
     {
-        private int _itemId = 0;
-        private int _pollId = 0;
-        private int _userId = 0;
-        private string _name = "";
-        private string _description = "";
+        private int _ItemId = 0;
+        private int _PollId = 0;
+        private int _UserId = 0;
+        private string _Name = "";
+        private string _Description = "";
         [Key]
-        public int itemId
+        public int ItemId
         {
-            get { return _itemId; }
-            set { _itemId = value; }
+            get { return _ItemId; }
+            set { _ItemId = value; }
         }
         //[Key,ForeignKey("Poll")]
-        public int pollId
+        public int PollId
         {
-            get { return _pollId; }
-            set { _pollId = value; }
+            get { return _PollId; }
+            set { _PollId = value; }
         }
         public int userId
         {
-            get { return _userId; }
-            set { _userId = value; }
+            get { return _UserId; }
+            set { _UserId = value; }
         }
-        public string name
+        public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return _Name; }
+            set { _Name = value; }
         }
-        public string description
+        public string Description
         {
-            get { return _description; }
-            set { _description = value; }
+            get { return _Description; }
+            set { _Description = value; }
         }
     }
 }
