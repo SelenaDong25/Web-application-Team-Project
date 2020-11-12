@@ -8,37 +8,37 @@ namespace CSD412ProjectGroup00000100.Models
 {
     public class Poll
     {
-       private int _poll_id;
-       private int _user_id;
-       private String _name;
-       private String _description;
-       private Boolean _state;
+       private int _PollId = 0;
+       private int _UserId = 0;
+       private String _Name = "";
+       private String _Description = "";
+       private Boolean _State = false;
        [Key]
-       public int poll_id
+       public int pollId
        {
-            get { return _poll_id; }
-            set { _poll_id = value; }
+            get { return _PollId; }
+            set { _PollId = value; }
        }
         //[Key,ForeignKey("User???")] 
-        public int user_id
+        public int userId
         {
-            get { return _user_id; }
-            set { _user_id = value; }
+            get { return _UserId; }
+            set { _UserId = value; }
         }
         public String name
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return _Name; }
+            set { _Name = value; }
         }
         public String description
         {
-            get { return _description; }
-            set { _description = value; }
+            get { return _Description; }
+            set { _Description = value; }
         }
         public Boolean state
         {
-            get { return _state; }
-            set { _state = value; }
+            get { return _State; }
+            set { _State = value; }
         }
     }
 }

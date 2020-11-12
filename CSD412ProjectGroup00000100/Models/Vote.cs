@@ -1,48 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CSD412ProjectGroup00000100.Models
 {
     public class Vote
-    { 
-        private int _item_id;
-        private int _poll_id;
-        private int _user_id;
-        private int _voter_id;
-        private DateTime _vote_date_time;
+    {
+        private int _ItemId = 0;
+        private int _PollId = 0;
+        private int _UserId = 0;
+        private int _VoterId = 0;
+        private DateTime _VoteDateTime = DateTime.MinValue;
         //ToDo figure out how to do a composite ForeingKey key int .net
-        //[Key,ForeignKey("Item")]
+        //[Key,ForeignKey("Items")]
         [Key]
-        public int item_id
+        public int itemId
         {
-            get { return _item_id; }
-            set { _item_id = value; }
+            get { return _ItemId; }
+            set { _ItemId = value; }
         }
-        //[Key,ForeignKey("Poll")]
-        public int poll_id
+        //[Key,ForeignKey("Polls")]
+        public int pollId
         {
-            get { return _poll_id; }
-            set { _poll_id = value; }
+            get { return _PollId; }
+            set { _PollId = value; }
         }
         //[Key,ForeignKey("User???")] 
-        public int user_id
+        public int userId
         {
-            get { return _user_id; }
-            set { _user_id = value; }
+            get { return _UserId; }
+            set { _UserId = value; }
         }
-        public int voter_id
+        public int voterId
         {
-            get { return _voter_id; }
-            set { _voter_id = value; }
+            get { return _VoterId; }
+            set { _VoterId = value; }
         }
-        public DateTime vote_date_time 
+        public DateTime voteDateTime
         {
-            get { return _vote_date_time; }
-            set { _vote_date_time = value; }
+            get { return _VoteDateTime; }
+            set { _VoteDateTime = value; }
         }
     }
 }
