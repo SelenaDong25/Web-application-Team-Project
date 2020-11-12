@@ -11,48 +11,48 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                 name: "Items",
                 columns: table => new
                 {
-                    ItemId = table.Column<int>(nullable: false)
+                    itemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PollId = table.Column<int>(nullable: false),
+                    pollId = table.Column<int>(nullable: false),
                     userId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    name = table.Column<string>(nullable: true),
+                    description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Items", x => x.ItemId);
+                    table.PrimaryKey("PK_Items", x => x.itemId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Polls",
                 columns: table => new
                 {
-                    PollId = table.Column<int>(nullable: false)
+                    pollId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    State = table.Column<bool>(nullable: false)
+                    userId = table.Column<int>(nullable: false),
+                    name = table.Column<string>(nullable: true),
+                    description = table.Column<string>(nullable: true),
+                    state = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Polls", x => x.PollId);
+                    table.PrimaryKey("PK_Polls", x => x.pollId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Votes",
                 columns: table => new
                 {
-                    ItemId = table.Column<int>(nullable: false)
+                    itemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PollId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    Voter_id = table.Column<int>(nullable: false),
-                    VoteDateTime = table.Column<DateTime>(nullable: false)
+                    pollId = table.Column<int>(nullable: false),
+                    userId = table.Column<int>(nullable: false),
+                    voterId = table.Column<int>(nullable: false),
+                    voteDateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Votes", x => x.ItemId);
+                    table.PrimaryKey("PK_Votes", x => x.itemId);
                 });
         }
 

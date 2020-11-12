@@ -14,13 +14,13 @@ namespace CSD412ProjectGroup00000100.Models
         private string _Name = "";
         private string _Description = "";
         [Key]
-        public int ItemId
+        public int itemId
         {
             get { return _ItemId; }
             set { _ItemId = value; }
         }
         //[Key,ForeignKey("Poll")]
-        public int PollId
+        public int pollId
         {
             get { return _PollId; }
             set { _PollId = value; }
@@ -30,12 +30,12 @@ namespace CSD412ProjectGroup00000100.Models
             get { return _UserId; }
             set { _UserId = value; }
         }
-        public string Name
+        public string name
         {
             get { return _Name; }
             set { _Name = value; }
         }
-        public string Description
+        public string description
         {
             get { return _Description; }
             set { _Description = value; }

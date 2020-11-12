@@ -14,28 +14,28 @@ namespace CSD412ProjectGroup00000100.Models
        private String _Description = "";
        private Boolean _State = false;
        [Key]
-       public int PollId
+       public int pollId
        {
             get { return _PollId; }
             set { _PollId = value; }
        }
         //[Key,ForeignKey("User???")] 
-        public int UserId
+        public int userId
         {
             get { return _UserId; }
             set { _UserId = value; }
         }
-        public String Name
+        public String name
         {
             get { return _Name; }
             set { _Name = value; }
         }
-        public String Description
+        public String description
         {
             get { return _Description; }
             set { _Description = value; }
         }
-        public Boolean State
+        public Boolean state
         {
             get { return _State; }
             set { _State = value; }

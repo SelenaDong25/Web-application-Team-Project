@@ -13,29 +13,29 @@ namespace CSD412ProjectGroup00000100.Models
         //ToDo figure out how to do a composite ForeingKey key int .net
         //[Key,ForeignKey("Items")]
         [Key]
-        public int ItemId
+        public int itemId
         {
             get { return _ItemId; }
             set { _ItemId = value; }
         }
         //[Key,ForeignKey("Polls")]
-        public int PollId
+        public int pollId
         {
             get { return _PollId; }
             set { _PollId = value; }
         }
         //[Key,ForeignKey("User???")] 
-        public int UserId
+        public int userId
         {
             get { return _UserId; }
             set { _UserId = value; }
         }
-        public int Voter_id
+        public int voterId
         {
             get { return _VoterId; }
             set { _VoterId = value; }
         }
-        public DateTime VoteDateTime
+        public DateTime voteDateTime
         {
             get { return _VoteDateTime; }
             set { _VoteDateTime = value; }
