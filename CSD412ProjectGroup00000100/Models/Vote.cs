@@ -9,7 +9,7 @@ namespace CSD412ProjectGroup00000100.Models
         private int _pollId = 0;
         private int _userId = 0;
         private int _voterId = 0;
-        private DateTime _VoteDateTime = DateTime.MinValue;
+        private DateTime _voteDateTime = DateTime.MinValue;
         //ToDo figure out how to do a composite ForeingKey key int .net
         //[Key,ForeignKey("Items")]
         [Key]
@@ -37,8 +37,8 @@ namespace CSD412ProjectGroup00000100.Models
         }
         public DateTime voteDateTime
         {
-            get { return _VoteDateTime; }
-            set { _VoteDateTime = value; }
+            get { return _voteDateTime; }
+            set { _voteDateTime = value; }
         }
     }
 }
