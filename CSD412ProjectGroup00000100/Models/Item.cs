@@ -13,19 +13,22 @@ namespace CSD412ProjectGroup00000100.Models
 
         private int _pollId = 0;
 
+        public virtual Poll Poll { get; set; }
+
         private string _userId = "";
 
         private string _name = "";
 
         private string _description = "";
 
-        [Key]
+        public virtual ICollection<Vote> Votes { get; set; }
+        
         public int ItemId
         {
             get { return _itemId; }
             set { _itemId = value; }
         }
-        //[Key,ForeignKey("Poll")]
+       
         public int PollId
         {
             get { return _pollId; }
