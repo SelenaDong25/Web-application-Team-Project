@@ -8,6 +8,7 @@ namespace CSD412ProjectGroup00000100.Models
 {
     public class Poll
     {
+
        private int _pollId = 0;
 
        private int _userId = 0;

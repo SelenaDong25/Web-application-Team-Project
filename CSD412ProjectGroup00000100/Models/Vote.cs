@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CSD412ProjectGroup00000100.Models
 {
     public class Vote
+
     {
         private int _itemId = 0;
 
@@ -16,7 +21,7 @@ namespace CSD412ProjectGroup00000100.Models
         private DateTime _voteDateTime = DateTime.MinValue;
 
         //ToDo figure out how to do a composite ForeingKey key int .net
-        //[Key,ForeignKey("Items")]
+        //[Key,ForeignKey("Item")]
         [Key]
         public int ItemId
         {
@@ -44,6 +49,7 @@ namespace CSD412ProjectGroup00000100.Models
         {
             get { return _voteDateTime; }
             set { _voteDateTime = value; }
+
         }
     }
 }

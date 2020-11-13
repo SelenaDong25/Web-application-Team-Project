@@ -4,14 +4,16 @@ using CSD412ProjectGroup00000100.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSD412ProjectGroup00000100.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201111184445_BaseMigration")]
+    partial class BaseMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,83 +23,72 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Item", b =>
                 {
-
-                    b.Property<int>("ItemId")
-
+                    b.Property<int>("item_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-
-                    b.Property<int>("PollId")
+                    b.Property<int>("poll_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("user_id")
                         .HasColumnType("int");
 
-                    b.HasKey("ItemId");
-
+                    b.HasKey("item_id");
 
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Poll", b =>
                 {
-
-                    b.Property<int>("PollId")
-
+                    b.Property<int>("poll_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("State")
+                    b.Property<bool>("state")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("user_id")
                         .HasColumnType("int");
 
-                    b.HasKey("PollId");
-
+                    b.HasKey("poll_id");
 
                     b.ToTable("Polls");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Vote", b =>
                 {
-
-                    b.Property<int>("ItemId")
-
+                    b.Property<int>("item_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-
-                    b.Property<int>("PollId")
+                    b.Property<int>("poll_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("user_id")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("VoteDateTime")
+                    b.Property<DateTime>("vote_date_time")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("VoterId")
+                    b.Property<int>("voter_id")
                         .HasColumnType("int");
 
-                    b.HasKey("ItemId");
-
+                    b.HasKey("item_id");
 
                     b.ToTable("Votes");
                 });

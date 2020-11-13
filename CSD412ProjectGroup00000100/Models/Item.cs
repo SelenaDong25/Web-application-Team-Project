@@ -8,6 +8,7 @@ namespace CSD412ProjectGroup00000100.Models
 {
     public class Item
     {
+
         private int _itemId = 0;
 
         private int _pollId = 0;
@@ -36,11 +37,13 @@ namespace CSD412ProjectGroup00000100.Models
             set { _userId = value; }
         }
         public string Name
+
         {
             get { return _name; }
             set { _name = value; }
         }
         public string Description
+
         {
             get { return _description; }
             set { _description = value; }
