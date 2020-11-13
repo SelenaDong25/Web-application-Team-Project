@@ -11,11 +11,11 @@ namespace CSD412ProjectGroup00000100.Models
 
        private int _pollId = 0;
 
-       private int _userId = 0;
+       private string _userId = "";
 
-       private String _name = "";
+       private string _name = "";
 
-       private String _description = "";
+       private string _description = "";
 
        private Boolean _state = false;
 
@@ -26,17 +26,17 @@ namespace CSD412ProjectGroup00000100.Models
             set { _pollId = value; }
        }
         //[Key,ForeignKey("User???")] 
-        public int UserId
+        public string UserId
         {
             get { return _userId; }
             set { _userId = value; }
         }
-        public String Name
+        public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
-        public String Description
+        public string Description
         {
             get { return _description; }
             set { _description = value; }

@@ -14,7 +14,7 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     ItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PollId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
@@ -29,7 +29,7 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                 {
                     PollId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     State = table.Column<bool>(nullable: false)
@@ -46,7 +46,7 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     ItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PollId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     VoterId = table.Column<int>(nullable: false),
                     VoteDateTime = table.Column<DateTime>(nullable: false)
                 },

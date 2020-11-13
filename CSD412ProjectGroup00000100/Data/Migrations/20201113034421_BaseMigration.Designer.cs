@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSD412ProjectGroup00000100.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201113025553_BaseMigration")]
+    [Migration("20201113034421_BaseMigration")]
     partial class BaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,8 +37,8 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.Property<int>("PollId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ItemId");
 
@@ -61,8 +61,8 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.Property<bool>("State")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PollId");
 
@@ -79,8 +79,8 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.Property<int>("PollId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("VoteDateTime")
                         .HasColumnType("datetime2");

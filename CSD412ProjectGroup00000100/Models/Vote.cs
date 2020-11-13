@@ -14,7 +14,7 @@ namespace CSD412ProjectGroup00000100.Models
 
         private int _pollId = 0;
 
-        private int _userId = 0;
+        private string _userId = "";
 
         private int _voterId = 0;
 
@@ -35,7 +35,7 @@ namespace CSD412ProjectGroup00000100.Models
             set { _pollId = value; }
         }
         //[Key,ForeignKey("User???")] 
-        public int UserId
+        public string UserId
         {
             get { return _userId; }
             set { _userId = value; }

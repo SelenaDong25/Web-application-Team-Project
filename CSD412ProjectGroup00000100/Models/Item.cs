@@ -13,7 +13,7 @@ namespace CSD412ProjectGroup00000100.Models
 
         private int _pollId = 0;
 
-        private int _userId = 0;
+        private string _userId = "";
 
         private string _name = "";
 
@@ -31,7 +31,7 @@ namespace CSD412ProjectGroup00000100.Models
             get { return _pollId; }
             set { _pollId = value; }
         }
-        public int UserId
+        public string UserId
         {
             get { return _userId; }
             set { _userId = value; }
