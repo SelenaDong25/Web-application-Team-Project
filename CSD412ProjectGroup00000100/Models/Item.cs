@@ -13,16 +13,13 @@ namespace CSD412ProjectGroup00000100.Models
 
         private int _pollId = 0;
 
-        public virtual Poll Poll { get; set; }
-
         private string _userId = "";
 
         private string _name = "";
 
         private string _description = "";
 
-        public virtual ICollection<Vote> Votes { get; set; }
-        
+        [Key]
         public int ItemId
         {
             get { return _itemId; }
@@ -34,6 +31,8 @@ namespace CSD412ProjectGroup00000100.Models
             get { return _pollId; }
             set { _pollId = value; }
         }
+        public virtual Poll Poll { get; set; }
+
         public string UserId
         {
             get { return _userId; }
@@ -51,5 +50,6 @@ namespace CSD412ProjectGroup00000100.Models
             get { return _description; }
             set { _description = value; }
         }
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

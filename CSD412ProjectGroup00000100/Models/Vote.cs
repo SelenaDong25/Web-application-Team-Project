@@ -15,10 +15,10 @@ namespace CSD412ProjectGroup00000100.Models
         private int _pollId = 0;
 
         private string _userId = "";
-        public virtual Item Item { get; set; }
+        
 
         private string _voterId = "";
-       public virtual ApplicationUser Voter { get; set; }
+       
 
         private DateTime _voteDateTime = DateTime.MinValue;
    
@@ -28,13 +28,15 @@ namespace CSD412ProjectGroup00000100.Models
             get { return _itemId; }
             set { _itemId = value; }
         }
-    
+
+        public virtual Item Item { get; set; }
+
         public int PollId
         {
             get { return _pollId; }
             set { _pollId = value; }
         }
-                public string UserId
+        public string UserId
         {
             get { return _userId; }
             set { _userId = value; }
@@ -44,6 +46,8 @@ namespace CSD412ProjectGroup00000100.Models
             get { return _voterId; }
             set { _voterId = value; }
         }
+
+        public virtual ApplicationUser Voter { get; set; }
         public DateTime VoteDateTime
         {
             get { return _voteDateTime; }

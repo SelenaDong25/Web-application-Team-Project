@@ -13,13 +13,9 @@ namespace CSD412ProjectGroup00000100.Models
 
         private string _userId = "";
 
-        public virtual ApplicationUser User { get; set; }
-
         private string _name = "";
 
        private string _description = "";
-
-       public virtual ICollection<Item> Items { get; set; }
 
        private Boolean _state = false;
 
@@ -35,6 +31,7 @@ namespace CSD412ProjectGroup00000100.Models
             get { return _userId; }
             set { _userId = value; }
         }
+        public virtual ApplicationUser User { get; set; }
         public string Name
         {
             get { return _name; }
@@ -50,5 +47,6 @@ namespace CSD412ProjectGroup00000100.Models
             get { return _state; }
             set { _state = value; }
         }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }
