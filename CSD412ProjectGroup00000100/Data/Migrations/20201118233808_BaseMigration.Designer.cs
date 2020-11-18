@@ -10,27 +10,23 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSD412ProjectGroup00000100.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201117094948_BaseMigration")]
+    [Migration("20201118233808_BaseMigration")]
     partial class BaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Item", b =>
                 {
                     b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PollId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -38,20 +34,22 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ItemId", "UserId", "PollId");
+                    b.Property<int>("PollId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("UserId", "PollId");
+                    b.HasKey("ItemId");
+
+                    b.HasIndex("PollId");
 
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Poll", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("PollId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -62,29 +60,36 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.Property<bool>("State")
                         .HasColumnType("bit");
 
-                    b.HasKey("UserId", "PollId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PollId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Polls");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Vote", b =>
                 {
+                    b.Property<int>("VoteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PollId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VoterId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("VoteDateTime")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ItemId", "UserId", "PollId", "VoterId");
+                    b.Property<string>("VoterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("VoteId");
+
+                    b.HasIndex("ItemId");
 
                     b.HasIndex("VoterId");
 
@@ -308,8 +313,8 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                 {
                     b.HasOne("CSD412ProjectGroup00000100.Models.Poll", "Poll")
                         .WithMany("Items")
-                        .HasForeignKey("UserId", "PollId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .HasForeignKey("PollId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -317,23 +322,21 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                 {
                     b.HasOne("CSD412ProjectGroup00000100.Models.ApplicationUser", "User")
                         .WithMany("Polls")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Vote", b =>
                 {
+                    b.HasOne("CSD412ProjectGroup00000100.Models.Item", "Item")
+                        .WithMany("Votes")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CSD412ProjectGroup00000100.Models.ApplicationUser", "Voter")
                         .WithMany("Votes")
                         .HasForeignKey("VoterId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
-
-                    b.HasOne("CSD412ProjectGroup00000100.Models.Item", "Item")
-                        .WithMany("Votes")
-                        .HasForeignKey("ItemId", "UserId", "PollId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

@@ -33,11 +33,6 @@ namespace CSD412ProjectGroup00000100.Models
         }
         public virtual Poll Poll { get; set; }
 
-        public string UserId
-        {
-            get { return _userId; }
-            set { _userId = value; }
-        }
         public string Name
 
         {
