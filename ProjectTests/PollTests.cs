@@ -10,7 +10,7 @@ namespace ProjectTests
         public void Test1()
         {
             Poll p = new Poll();
-            Assert.False(p.name == "");
+            Assert.False(p.Name == "");
         }
         [Theory]
         [InlineData("Test String", "Test String")]
@@ -19,8 +19,8 @@ namespace ProjectTests
         public void Test2(string description, string expected)
         {
             Poll p = new Poll();
-            p.description = description;
-            Assert.True(p.description == expected);
+            p.Description = description;
+            Assert.True(p.Description == expected);
         }
     }
 }

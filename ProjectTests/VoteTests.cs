@@ -10,7 +10,7 @@ namespace ProjectTests
         public void Test1()
         {
             Vote v = new Vote();
-            Assert.True(v.voter_id == 0);
+            Assert.True(v.VoteId == 0);
         }
         
         [Theory]
@@ -20,9 +20,9 @@ namespace ProjectTests
         {
             Vote v = new Vote();
 
-            v.voter_id = vID;
+            v.VoteId = vID;
             
-            Assert.True(v.voter_id == expected);
+            Assert.True(v.VoteId == expected);
         }
     }
 }
