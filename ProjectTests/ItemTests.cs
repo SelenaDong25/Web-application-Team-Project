@@ -10,7 +10,7 @@ namespace ProjectTests
         public void Test1()
         {
             Item i = new Item();
-            Assert.False(i.Name == "");
+            Assert.True(i.Name == "");
         }
         [Theory]
         [InlineData("Test String", "Test String")]

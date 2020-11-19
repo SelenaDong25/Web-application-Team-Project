@@ -280,3 +280,8 @@ C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\o
 C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\obj\Debug\netcoreapp3.1\CSD412ProjectGroup00000100.dll
 C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\obj\Debug\netcoreapp3.1\CSD412ProjectGroup00000100.pdb
 C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\obj\Debug\netcoreapp3.1\CSD412ProjectGroup00000100.genruntimeconfig.cache
+C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\obj\Debug\netcoreapp3.1\Razor\Views\Polls\Create.cshtml.g.cs
+C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\obj\Debug\netcoreapp3.1\Razor\Views\Polls\Delete.cshtml.g.cs
+C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\obj\Debug\netcoreapp3.1\Razor\Views\Polls\Details.cshtml.g.cs
+C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\obj\Debug\netcoreapp3.1\Razor\Views\Polls\Edit.cshtml.g.cs
+C:\Users\livei\Documents\GitHub\LWTechCSD412Project\CSD412ProjectGroup00000100\obj\Debug\netcoreapp3.1\Razor\Views\Polls\Index.cshtml.g.cs
