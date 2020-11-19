@@ -8,37 +8,43 @@ namespace CSD412ProjectGroup00000100.Models
 {
     public class Item
     {
-        private int _item_id;
-        private int _poll_id;
-        private int _user_id;
-        private string _name;
-        private String _description;
+
+        private int _itemId = 0;
+
+        private int _pollId = 0;
+
+        private string _userId = "";
+
+        private string _name = "";
+
+        private string _description = "";
+
         [Key]
-        public int item_id
+        public int ItemId
         {
-            get { return _item_id; }
-            set { _item_id = value; }
+            get { return _itemId; }
+            set { _itemId = value; }
         }
-        //[Key,ForeignKey("Poll")]
-        public int poll_id
+       
+        public int PollId
         {
-            get { return _poll_id; }
-            set { _poll_id = value; }
+            get { return _pollId; }
+            set { _pollId = value; }
         }
-        public int user_id
-        {
-            get { return _user_id; }
-            set { _user_id = value; }
-        }
-        public String name
+        public virtual Poll Poll { get; set; }
+
+        public string Name
+
         {
             get { return _name; }
             set { _name = value; }
         }
-        public String description
+        public string Description
+
         {
             get { return _description; }
             set { _description = value; }
         }
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

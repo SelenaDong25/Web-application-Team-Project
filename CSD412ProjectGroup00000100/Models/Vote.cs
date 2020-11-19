@@ -8,41 +8,43 @@ using System.Threading.Tasks;
 namespace CSD412ProjectGroup00000100.Models
 {
     public class Vote
-    { 
-        private int _item_id;
-        private int _poll_id;
-        private int _user_id;
-        private int _voter_id;
-        private DateTime _vote_date_time;
-        //ToDo figure out how to do a composite ForeingKey key int .net
-        //[Key,ForeignKey("Item")]
+
+    {
+        private int _itemId = 0;
+
+        private int _voteId = 0;
+
+        private string _voterId = "";
+       
+
+        private DateTime _voteDateTime = DateTime.MinValue;
+   
         [Key]
-        public int item_id
+        public int VoteId
         {
-            get { return _item_id; }
-            set { _item_id = value; }
+            get { return _voteId; }
+            set { _voteId = value; }
         }
-        //[Key,ForeignKey("Poll")]
-        public int poll_id
+        public int ItemId
         {
-            get { return _poll_id; }
-            set { _poll_id = value; }
+            get { return _itemId; }
+            set { _itemId = value; }
         }
-        //[Key,ForeignKey("User???")] 
-        public int user_id
+
+        public virtual Item Item { get; set; }
+
+        public string VoterId
         {
-            get { return _user_id; }
-            set { _user_id = value; }
+            get { return _voterId; }
+            set { _voterId = value; }
         }
-        public int voter_id
+
+        public virtual ApplicationUser Voter { get; set; }
+        public DateTime VoteDateTime
         {
-            get { return _voter_id; }
-            set { _voter_id = value; }
-        }
-        public DateTime vote_date_time 
-        {
-            get { return _vote_date_time; }
-            set { _vote_date_time = value; }
+            get { return _voteDateTime; }
+            set { _voteDateTime = value; }
+
         }
     }
 }

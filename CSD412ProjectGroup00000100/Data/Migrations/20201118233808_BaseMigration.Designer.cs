@@ -10,85 +10,88 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSD412ProjectGroup00000100.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201111184445_BaseMigration")]
+    [Migration("20201118233808_BaseMigration")]
     partial class BaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Item", b =>
                 {
-                    b.Property<int>("item_id")
+                    b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("poll_id")
+                    b.Property<int>("PollId")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
+                    b.HasKey("ItemId");
 
-                    b.HasKey("item_id");
+                    b.HasIndex("PollId");
 
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Poll", b =>
                 {
-                    b.Property<int>("poll_id")
+                    b.Property<int>("PollId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("state")
+                    b.Property<bool>("State")
                         .HasColumnType("bit");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("poll_id");
+                    b.HasKey("PollId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Polls");
                 });
 
             modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Vote", b =>
                 {
-                    b.Property<int>("item_id")
+                    b.Property<int>("VoteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("poll_id")
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("vote_date_time")
+                    b.Property<DateTime>("VoteDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("voter_id")
-                        .HasColumnType("int");
+                    b.Property<string>("VoterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("item_id");
+                    b.HasKey("VoteId");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("VoterId");
 
                     b.ToTable("Votes");
                 });
@@ -156,6 +159,10 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -207,6 +214,8 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -291,6 +300,44 @@ namespace CSD412ProjectGroup00000100.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CSD412ProjectGroup00000100.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Item", b =>
+                {
+                    b.HasOne("CSD412ProjectGroup00000100.Models.Poll", "Poll")
+                        .WithMany("Items")
+                        .HasForeignKey("PollId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Poll", b =>
+                {
+                    b.HasOne("CSD412ProjectGroup00000100.Models.ApplicationUser", "User")
+                        .WithMany("Polls")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CSD412ProjectGroup00000100.Models.Vote", b =>
+                {
+                    b.HasOne("CSD412ProjectGroup00000100.Models.Item", "Item")
+                        .WithMany("Votes")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CSD412ProjectGroup00000100.Models.ApplicationUser", "Voter")
+                        .WithMany("Votes")
+                        .HasForeignKey("VoterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

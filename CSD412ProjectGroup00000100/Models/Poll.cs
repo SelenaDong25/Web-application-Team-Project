@@ -8,37 +8,45 @@ namespace CSD412ProjectGroup00000100.Models
 {
     public class Poll
     {
-       private int _poll_id;
-       private int _user_id;
-       private String _name;
-       private String _description;
-       private Boolean _state;
+
+        private int _pollId = 0;
+
+        private string _userId = "";
+
+        private string _name = "";
+
+       private string _description = "";
+
+       private Boolean _state = false;
+
        [Key]
-       public int poll_id
+       public int PollId
        {
-            get { return _poll_id; }
-            set { _poll_id = value; }
+            get { return _pollId; }
+            set { _pollId = value; }
        }
-        //[Key,ForeignKey("User???")] 
-        public int user_id
+  
+        public string UserId
         {
-            get { return _user_id; }
-            set { _user_id = value; }
+            get { return _userId; }
+            set { _userId = value; }
         }
-        public String name
+        public virtual ApplicationUser User { get; set; }
+        public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
-        public String description
+        public string Description
         {
             get { return _description; }
             set { _description = value; }
         }
-        public Boolean state
+        public Boolean State
         {
             get { return _state; }
             set { _state = value; }
         }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }
