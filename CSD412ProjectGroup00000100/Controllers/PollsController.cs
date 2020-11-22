@@ -31,7 +31,11 @@ namespace CSD412ProjectGroup00000100.Controllers
             IQueryable<Poll> applicationDbContext = _context.Polls.Include(p => p.User).Where(r => r.User == theUser);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        public async Task<IActionResult> AllPolls()
+        {
+            IQueryable<Poll> applicationDbContext = _context.Polls.Include(p => p.User);
+            return View(await applicationDbContext.ToListAsync());
+        }
         // GET: Polls/Details/5
         public async Task<IActionResult> Details(int? id)
         {
