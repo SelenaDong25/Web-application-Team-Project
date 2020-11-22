@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CSD412ProjectGroup00000100.Data;
 using CSD412ProjectGroup00000100.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD412ProjectGroup00000100.Controllers
 {
+    [Authorize]
     public class PollsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PollsController(ApplicationDbContext context)
+        public PollsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Polls
@@ -57,10 +62,12 @@ namespace CSD412ProjectGroup00000100.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PollId,UserId,Name,Description,State")] Poll poll)
+        public async Task<IActionResult> Create([Bind("Name,Description")] Poll poll)
         {
             if (ModelState.IsValid)
             {
+                poll.User = await _userManager.GetUserAsync(User);
+                poll.State = false;
                 _context.Add(poll);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
