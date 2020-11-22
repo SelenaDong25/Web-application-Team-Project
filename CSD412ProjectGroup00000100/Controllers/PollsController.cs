@@ -27,7 +27,8 @@ namespace CSD412ProjectGroup00000100.Controllers
         // GET: Polls
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Polls.Include(p => p.User);
+            var TheUser = await _userManager.GetUserAsync(User);
+            var applicationDbContext = _context.Polls.Include(p => p.User).Where(r => r.User == TheUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
