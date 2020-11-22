@@ -27,7 +27,13 @@ namespace CSD412ProjectGroup00000100.Controllers
             var applicationDbContext = _context.Items.Include(i => i.Poll);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [HttpGet]
+        public async Task<IActionResult> ViewPollItems(int poll)
+        {
+            var applicationDbContext = _context.Items.Include(i => i.Poll).Where(r => r.PollId == poll);
+            //ViewData["PollId"] = poll.PollId;
+            return View(await applicationDbContext.ToListAsync());
+        }
         // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
         {
