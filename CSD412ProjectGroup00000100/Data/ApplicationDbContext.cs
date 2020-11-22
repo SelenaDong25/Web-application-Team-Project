@@ -12,6 +12,8 @@ namespace CSD412ProjectGroup00000100.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            // creates and/or updates the data base to the latest migration
+            this.Database.Migrate();
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
