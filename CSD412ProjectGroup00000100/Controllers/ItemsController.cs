@@ -28,10 +28,10 @@ namespace CSD412ProjectGroup00000100.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
         [HttpGet]
-        public async Task<IActionResult> ViewPollItems(int poll)
+        public async Task<IActionResult> ViewPollItems(int pollId)
         {
-            var applicationDbContext = _context.Items.Include(i => i.Poll).Where(r => r.PollId == poll);
-            ViewData["PollId"] = poll;
+            var applicationDbContext = _context.Items.Include(i => i.Poll).Where(r => r.PollId == pollId);
+            ViewData["PollId"] = pollId;
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: Items/Details/5
@@ -54,9 +54,9 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // GET: Items/Create
-        public IActionResult Create(int poll)
+        public IActionResult Create(int pollId)
         {
-            ViewData["PollId"] = poll;
+            ViewData["PollId"] = pollId;
             return View();
         }
 
@@ -71,7 +71,7 @@ namespace CSD412ProjectGroup00000100.Controllers
             {
                 _context.Add(item);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ViewPollItems), new { poll = item.PollId });
+                return RedirectToAction(nameof(ViewPollItems), new { pollId = item.PollId });
             }
             ViewData["PollId"] = new SelectList(_context.Polls, "PollId", "PollId", item.PollId);
             return View(item);
