@@ -7,7 +7,7 @@
 <h1>ViewPollItems</h1>
 
 <p>
-    <a asp-action="Create" asp-route-id="@ViewData["PollId"]">Create New</a>
+    <a asp-controller="Polls" asp-action="Details" asp-route-id="@ViewData["PollId"]">Back to Poll</a>
 </p>
 <table class="table">
     <thead>

@@ -31,7 +31,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         public async Task<IActionResult> ViewPollItems(int poll)
         {
             var applicationDbContext = _context.Items.Include(i => i.Poll).Where(r => r.PollId == poll);
-            //ViewData["PollId"] = poll.PollId;
+            ViewData["PollId"] = poll;
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: Items/Details/5
@@ -54,9 +54,9 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // GET: Items/Create
-        public IActionResult Create(int pollId)
+        public IActionResult Create(int poll)
         {
-            ViewData["PollId"] = new SelectList(_context.Polls, "PollId", "PollId");
+            ViewData["PollId"] = poll;
             return View();
         }
 
@@ -71,7 +71,7 @@ namespace CSD412ProjectGroup00000100.Controllers
             {
                 _context.Add(item);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ViewPollItems), new { poll = item.PollId });
             }
             ViewData["PollId"] = new SelectList(_context.Polls, "PollId", "PollId", item.PollId);
             return View(item);
