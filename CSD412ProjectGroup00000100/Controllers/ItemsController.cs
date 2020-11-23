@@ -32,6 +32,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         {
             var applicationDbContext = _context.Items.Include(i => i.Poll).Where(r => r.PollId == pollId);
             ViewData["PollId"] = pollId;
+            ViewData["State"] = _context.Polls.Find(pollId).State;
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: Items/Details/5
