@@ -33,7 +33,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
         public async Task<IActionResult> AllPolls()
         {
-            IQueryable<Poll> applicationDbContext = _context.Polls.Include(p => p.User);
+            IQueryable<Poll> applicationDbContext = _context.Polls.Include(p => p.User).Where(r => r.State == true);
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: Polls/Details/5
@@ -166,6 +166,32 @@ namespace CSD412ProjectGroup00000100.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Polls/State/5
+        public async Task<IActionResult> State(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var poll = await _context.Polls
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(m => m.PollId == id);
+            if (poll == null)
+            {
+                return NotFound();
+            }
+
+            return View(poll);
+        }
+        [HttpPost, ActionName("State")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StateConfirmed(int id)
+        {
+            _context.Polls.Find(id).State = true;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         private bool PollExists(int id)
         {
             return _context.Polls.Any(e => e.PollId == id);
