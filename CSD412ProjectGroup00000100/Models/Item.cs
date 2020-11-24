@@ -19,6 +19,8 @@ namespace CSD412ProjectGroup00000100.Models
 
         private string _description = "";
 
+        private string _colorValue = "";
+
         [Key]
         public int ItemId
         {
@@ -44,6 +46,12 @@ namespace CSD412ProjectGroup00000100.Models
         {
             get { return _description; }
             set { _description = value; }
+        }
+
+        public string ColorValue
+        {
+            get { return _colorValue; }
+            set { _colorValue = value; }
         }
         public virtual ICollection<Vote> Votes { get; set; }
     }
