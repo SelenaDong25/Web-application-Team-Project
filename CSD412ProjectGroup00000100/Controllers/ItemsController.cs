@@ -66,7 +66,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,PollId,Name,Description")] Item item)
+        public async Task<IActionResult> Create([Bind("ItemId,PollId,Name,Description,ColorValue")] Item item)
         {
             if (ModelState.IsValid)
             {
