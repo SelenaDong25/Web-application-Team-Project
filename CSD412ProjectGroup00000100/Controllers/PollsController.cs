@@ -45,14 +45,14 @@ namespace CSD412ProjectGroup00000100.Controllers
             }
 
             var poll = await _context.Polls
-                .Include(p => p.User)
+                .Include(p => p.Items)
                 .FirstOrDefaultAsync(m => m.PollId == id);
             if (poll == null)
             {
                 return NotFound();
             }
-
-            return View(poll);
+            var model = new ViewPoll { CurrentPoll = poll, Items = poll.Items.ToArray() };
+            return View(model);
         }
 
         // GET: Polls/Create

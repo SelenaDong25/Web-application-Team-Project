@@ -1,4 +1,4 @@
-﻿@model CSD412ProjectGroup00000100.Models.Poll
+﻿@model CSD412ProjectGroup00000100.Models.ViewPoll
 
 @{
     ViewData["Title"] = "Details";
@@ -11,27 +11,65 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.CurrentPoll.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrentPoll.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrentPoll.Description)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrentPoll.Description)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrentPoll.State)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.State)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrentPoll.State)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-controller="Items" asp-action="ViewPollItems" asp-route-pollId="@Model.PollId">ViewItems</a> |
+    <a asp-controller="Items" asp-action="ViewPollItems" asp-route-pollId="@Model.CurrentPoll.PollId">ViewItems</a> |
     <a asp-action="AllPolls">Back to List</a> |
     <a asp-action="Index">Back to myList</a>
 </div>
+<h1>Items</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Poll)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Poll.PollId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
