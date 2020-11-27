@@ -22,5 +22,20 @@ namespace ProjectTests
             i.Description = description;
             Assert.True(i.Description == expected);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            Item i = new Item();
+            Assert.True(i.ItemId == 0);
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            Item i = new Item();
+            Assert.True(i.PollId == 0);
+        }
+
     }
 }
