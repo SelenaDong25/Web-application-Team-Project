@@ -22,5 +22,19 @@ namespace ProjectTests
             p.Description = description;
             Assert.True(p.Description == expected);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            Poll p = new Poll();
+            Assert.True(p.PollId == 0);
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            Poll p = new Poll();
+            Assert.True(p.UserId == "");
+        }
     }
 }

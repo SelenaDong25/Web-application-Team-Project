@@ -12,7 +12,7 @@ namespace ProjectTests
             Vote v = new Vote();
             Assert.True(v.VoteId == 0);
         }
-        
+
         [Theory]
 
         [InlineData(37, 37)]
@@ -23,6 +23,20 @@ namespace ProjectTests
             v.VoteId = vID;
             
             Assert.True(v.VoteId == expected);
+        }
+
+        [Fact]
+        public void Test3()
+        {
+            Vote v = new Vote();
+            Assert.True(v.ItemId == 0);
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            Vote v = new Vote();
+            Assert.True(v.VoteDateTime == DateTime.MinValue );
         }
     }
 }
