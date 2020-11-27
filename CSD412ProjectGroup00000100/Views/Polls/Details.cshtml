@@ -5,7 +5,6 @@
 }
 
 <h1>Details</h1>
-
 <div>
     <h4>Poll</h4>
     <hr />
@@ -33,7 +32,12 @@
 <div>
     <a asp-controller="Items" asp-action="ViewPollItems" asp-route-pollId="@Model.CurrentPoll.PollId">ViewItems</a> |
     <a asp-action="AllPolls">Back to List</a> |
-    <a asp-action="Index">Back to myList</a>
+    <a asp-action="Index">Back to myList</a> |
+    @if (@Model.CurrentPoll.State == false)
+    {
+        <a asp-controller="Items" asp-action="Create" asp-route-pollId="@Model.CurrentPoll.PollId">| Add Item</a>
+        <a asp-controller="Polls" asp-action="State" asp-route-id="@Model.CurrentPoll.PollId">| change state</a>
+    }
 </div>
 <h1>Items</h1>
 <table class="table">
@@ -65,9 +69,12 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
+                    <a asp-controller="Items" asp-action="Details" asp-route-id="@item.ItemId">Details</a> 
+                    @if (@Model.CurrentPoll.State == false)
+                    {
+                    <a asp-controller="Items" asp-action="Edit" asp-route-id="@item.ItemId">| Edit</a> 
+                    <a asp-controller="Items" asp-action="Delete" asp-route-id="@item.ItemId">| Delete </a>
+                    }
                 </td>
             </tr>
         }
