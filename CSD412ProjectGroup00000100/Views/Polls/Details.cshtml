@@ -97,8 +97,38 @@
     <canvas id="myChart" style="padding: 0;margin: auto;display: block; "> </canvas>
 
     <script>
-    $.ajax({
-        type: "POST",
+        var myLabels = [];
+        var myColor = [];
+        var myData = [];
+
+        @foreach (var d in ViewBag.labels)
+        {
+            @:myLabels.push("@d");
+        }
+        @foreach (var d in ViewBag.data)
+        {
+            @:myData.push("@d");
+        } @foreach (var d in ViewBag.Color)
+        {
+            @:myColor.push("@d");
+        }
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: myLabels,
+                datasets: [{
+                    label: 'Poll Results',
+                    backgroundColor: myColor,
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: myData
+                }]
+
+          },
+            options: {}
+        });
+    @*$.ajax({
+        type: "pie",
         url: "/Chart/ShowPollChart/@ViewData["PollId"]",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -132,7 +162,7 @@
                 }
             });
         }
-    });
+    });*@
     </script>
 
 }
