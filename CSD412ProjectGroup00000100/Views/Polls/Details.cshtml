@@ -94,8 +94,9 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 
-    <canvas id="myChart" style="padding: 0;margin: auto;display: block; "> </canvas>
-
+    <canvas id="myPieChart" style="padding: 0;margin: auto;display: block;height:40vh; width:80vw"> </canvas>
+    <wbr>
+    <canvas id="myBarChart" style="padding: 0;margin: auto;display: block;height:40vh; width:80vw"> </canvas>
     <script>
         var myLabels = [];
         var myColor = [];
@@ -112,57 +113,41 @@
         {
             @:myColor.push("@d");
         }
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+        var pie = document.getElementById('myPieChart').getContext('2d');
+        var myChart = new Chart(pie, {
             type: 'pie',
             data: {
-                labels: myLabels,
+
                 datasets: [{
-                    label: 'Poll Results',
+                    label: 'Poll Pie Results',
                     backgroundColor: myColor,
                     borderColor: 'rgb(0, 0, 0)',
-                    data: myData
-                }]
+                    data: myData,
+                    order: 1
+                }],
+                labels: myLabels
+            },
 
-          },
             options: {}
         });
-    @*$.ajax({
-        type: "pie",
-        url: "/Chart/ShowPollChart/@ViewData["PollId"]",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (chData) {
-            var aData = chData;
-            var aLabels = aData[0];
-            var aDatasets1 = aData[1];
-            var dataT = {
-                labels: aLabels,
+        var bar = document.getElementById('myBarChart').getContext('2d');
+        var myChart = new Chart(bar, {
+            type: 'bar',
+            data: {
+
                 datasets: [{
-                    label: "Test Data",
-                    data: aDatasets1,
-                    fill: false,
-                    backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
-                    borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
-                    borderWidth: 1
-                }]
-            };
-            var ctx = $("#myChart").get(0).getContext("2d");
-            var myNewChart = new Chart(ctx, {
-                type: 'bar',
-                data: dataT,
-                options: {
-                    responsive: true,
-                    title: { display: true, text: 'CHART.JS DEMO CHART' },
-                    legend: { position: 'bottom' },
-                    scales: {
-                        xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' } }],
-                        yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' }, ticks: { stepSize: 50, beginAtZero: true } }]
-                    },
-                }
-            });
-        }
-    });*@
+                    label: 'Poll Bar Results',
+                    backgroundColor: myColor,
+                    borderColor: 'rgb(0, 0, 0)',
+                    data: myData,
+                    order: 1
+                }],
+                labels: myLabels
+            },
+
+            options: {}
+        });
+    
     </script>
 
 }
