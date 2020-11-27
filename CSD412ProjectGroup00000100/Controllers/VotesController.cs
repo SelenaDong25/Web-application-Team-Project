@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CSD412ProjectGroup00000100.Data;
 using CSD412ProjectGroup00000100.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace CSD412ProjectGroup00000100.Controllers
 {
@@ -16,9 +17,11 @@ namespace CSD412ProjectGroup00000100.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public VotesController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public VotesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Votes
@@ -49,10 +52,9 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // GET: Votes/Create
-        public IActionResult Create()
+        public IActionResult Create(int itemId)
         {
-            ViewData["ItemId"] = new SelectList(_context.Items, "ItemId", "ItemId");
-            ViewData["VoterId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
+            ViewData["ItemId"] = itemId;
             return View();
         }
 
@@ -61,16 +63,17 @@ namespace CSD412ProjectGroup00000100.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VoteId,ItemId,VoterId,VoteDateTime")] Vote vote)
+        public async Task<IActionResult> Create([Bind("VoteId,ItemId")] Vote vote)
         {
             if (ModelState.IsValid)
             {
+                vote.Voter = await _userManager.GetUserAsync(User);
+                vote.VoteDateTime = DateTime.Now;
                 _context.Add(vote);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ItemId"] = new SelectList(_context.Items, "ItemId", "ItemId", vote.ItemId);
-            ViewData["VoterId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", vote.VoterId);
+            ViewData["ItemId"] = vote.ItemId;
             return View(vote);
         }
 
