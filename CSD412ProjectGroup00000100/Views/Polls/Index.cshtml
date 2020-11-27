@@ -48,7 +48,7 @@
                 @if (item.State == false)
                 {
                   <a asp-controller="Items" asp-action="Create" asp-route-pollId="@item.PollId">| Add Item</a> 
-                    <a asp-controller="Polls" asp-action="State" asp-route-id="@item.PollId">| change state</a>
+                  <a asp-controller="Polls" asp-action="State" asp-route-id="@item.PollId">| change state</a>
                 }
             </td>
         </tr>
