@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using CSD412ProjectGroup00000100.Data;
 using CSD412ProjectGroup00000100.Models;
 using Microsoft.AspNetCore.Authorization;
-using System.Data;
 
 namespace CSD412ProjectGroup00000100.Controllers
 {
@@ -28,7 +27,6 @@ namespace CSD412ProjectGroup00000100.Controllers
             var applicationDbContext = _context.Items.Include(i => i.Poll);
             return View(await applicationDbContext.ToListAsync());
         }
-
         [HttpGet]
         public async Task<IActionResult> ViewPollItems(int pollId)
         {
@@ -37,38 +35,6 @@ namespace CSD412ProjectGroup00000100.Controllers
             ViewData["State"] = _context.Polls.Find(pollId).State;
             return View(await applicationDbContext.ToListAsync());
         }
-
-        [HttpPost]
-        public JsonResult ShowPollChart(int pollId)
-        {
-            List<object> iData = new List<object>();
-            IQueryable<Item> pollItems = _context.Items.Include(p => p.Votes).Where(r => r.PollId == pollId);
-
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Item Name",System.Type.GetType("System.String"));
-            dt.Columns.Add("Votes", System.Type.GetType("System.Int32"));
-            dt.Columns.Add("Color", System.Type.GetType("System.String"));
-
-            foreach(Item item in pollItems) 
-            {
-                DataRow dr = dt.NewRow();
-                dr["Item Name"] = item.Name;
-                dr["Votes"] = item.Votes.Count;
-                dr["Color"] = item.ColorValue;
-                dt.Rows.Add(dr);
-            }
-
-            foreach (DataColumn dc in dt.Columns)
-            {
-                List<object> x = new List<object>();
-                x = (from DataRow drr in dt.Rows select drr[dc.ColumnName]).ToList();
-                iData.Add(x);
-            }
-
-            return Json(iData);
-        }
-
         // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
         {
