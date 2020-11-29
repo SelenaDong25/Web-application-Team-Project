@@ -68,11 +68,21 @@ namespace CSD412ProjectGroup00000100.Controllers
         {
             if (ModelState.IsValid)
             {
-                vote.Voter = await _userManager.GetUserAsync(User);
-                vote.VoteDateTime = DateTime.Now;
-                _context.Add(vote);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                
+                Item itemHolder = await _context.Items.FindAsync(vote.ItemId);
+
+                Poll pollHolder = await _context.Polls.FindAsync(itemHolder.PollId);
+
+                IQueryable<Vote> otherVotes = _context.Votes.Include(p => p.Item).Where(x => x.Voter == user && x.Item == itemHolder);             
+                if ( pollHolder.State == true && (!otherVotes.Any()))
+                {
+                    vote.Voter = user;
+                    vote.VoteDateTime = DateTime.Now;
+                    _context.Add(vote);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Details","Polls", new { id = pollHolder.PollId });
+                }
             }
             ViewData["ItemId"] = vote.ItemId;
             return View(vote);

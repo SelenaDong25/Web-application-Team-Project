@@ -107,11 +107,16 @@ namespace CSD412ProjectGroup00000100.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(item);
-                await _context.SaveChangesAsync();
+                Poll pollHolder = await _context.Polls.FindAsync(item.PollId);
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                if (pollHolder.User == user && pollHolder.State == false)
+                {
+                    _context.Add(item);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(ViewPollItems), new { pollId = item.PollId });
             }
-            ViewData["PollId"] = new SelectList(_context.Polls, "PollId", "PollId", item.PollId);
+            ViewData["PollId"] = item.PollId;
             return View(item);
         }
 
@@ -128,7 +133,7 @@ namespace CSD412ProjectGroup00000100.Controllers
             {
                 return NotFound();
             }
-            ViewData["PollId"] = new SelectList(_context.Polls, "PollId", "PollId", item.PollId);
+            ViewData["PollId"] = item.PollId;
             return View(item);
         }
 
@@ -148,8 +153,13 @@ namespace CSD412ProjectGroup00000100.Controllers
             {
                 try
                 {
-                    _context.Update(item);
-                    await _context.SaveChangesAsync();
+                    Poll pollHolder = await _context.Polls.FindAsync(item.PollId);
+                    ApplicationUser user = await _userManager.GetUserAsync(User);
+                    if (pollHolder.User == user && pollHolder.State == false)
+                    {
+                        _context.Update(item);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -162,9 +172,9 @@ namespace CSD412ProjectGroup00000100.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ViewPollItems), new { pollId = item.PollId });
             }
-            ViewData["PollId"] = new SelectList(_context.Polls, "PollId", "PollId", item.PollId);
+            ViewData["PollId"] =  item.PollId;
             return View(item);
         }
 
@@ -192,7 +202,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var item = await _context.Items.FindAsync(id);
+            Item item = await _context.Items.FindAsync(id);
             Poll pollHolder = await _context.Polls.FindAsync(item.PollId);
             ApplicationUser user = await _userManager.GetUserAsync(User);
             if (pollHolder.User == user && pollHolder.State == false)
@@ -208,5 +218,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         {
             return _context.Items.Any(e => e.ItemId == id);
         }
+
+
     }
 }
