@@ -37,6 +37,7 @@
     {
         <a asp-controller="Items" asp-action="Create" asp-route-pollId="@Model.CurrentPoll.PollId">| Add Item</a>
         <a asp-controller="Polls" asp-action="State" asp-route-id="@Model.CurrentPoll.PollId">| change state</a>
+        <a asp-controller="Polls" asp-action="Edit" asp-route-id="@Model.CurrentPoll.PollId">| Edit</a>
     }
 </div>
 <h1>Items</h1>
