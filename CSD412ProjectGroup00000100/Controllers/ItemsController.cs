@@ -9,6 +9,7 @@ using CSD412ProjectGroup00000100.Data;
 using CSD412ProjectGroup00000100.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace CSD412ProjectGroup00000100.Controllers
 {
@@ -17,9 +18,11 @@ namespace CSD412ProjectGroup00000100.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public ItemsController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ItemsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Items
@@ -190,8 +193,14 @@ namespace CSD412ProjectGroup00000100.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var item = await _context.Items.FindAsync(id);
-            _context.Items.Remove(item);
-            await _context.SaveChangesAsync();
+            Poll pollHolder = await _context.Polls.FindAsync(item.PollId);
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+            if (pollHolder.User == user && pollHolder.State == false)
+            {
+                _context.Items.Remove(item);
+                await _context.SaveChangesAsync();
+                
+            }
             return RedirectToAction(nameof(Index));
         }
 
