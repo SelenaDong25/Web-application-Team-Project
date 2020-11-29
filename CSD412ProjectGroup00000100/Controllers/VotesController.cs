@@ -25,6 +25,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // GET: Votes
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Votes.Include(v => v.Item).Include(v => v.Voter);
@@ -78,6 +79,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // GET: Votes/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,6 +98,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // POST: Votes/Edit/5
+        [Authorize(Roles = "Administrator")]
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -133,6 +136,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // GET: Votes/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -153,6 +157,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // POST: Votes/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
