@@ -91,7 +91,6 @@ namespace CSD412ProjectGroup00000100.Controllers
                 ViewBag.labels = iData.ElementAt(0);
                 ViewBag.data = iData.ElementAt(1);
                 ViewBag.color = iData.ElementAt(2);
-                model.IData = iData;
             }
             return View(model);
         }
@@ -123,7 +122,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         }
 
         // GET: Polls/Edit/5
-        [Authorize(Roles = "Administrator")]
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -131,7 +130,7 @@ namespace CSD412ProjectGroup00000100.Controllers
                 return NotFound();
             }
 
-            var poll = await _context.Polls.FindAsync(id);
+            Poll poll = await _context.Polls.FindAsync(id);
             if (poll == null)
             {
                 return NotFound();
@@ -145,8 +144,7 @@ namespace CSD412ProjectGroup00000100.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(int id, [Bind("PollId,UserId,Name,Description,State")] Poll poll)
+        public async Task<IActionResult> Edit(int id, [Bind("PollId,Name,Description")] Poll poll)
         {
             if (id != poll.PollId)
             {
@@ -157,8 +155,15 @@ namespace CSD412ProjectGroup00000100.Controllers
             {
                 try
                 {
-                    _context.Update(poll);
-                    await _context.SaveChangesAsync();
+                    Poll pollHolder = await _context.Polls.FindAsync(id);
+                    ApplicationUser user = await _userManager.GetUserAsync(User);
+                    if (pollHolder.User == user && pollHolder.State == false)
+                    {
+                        pollHolder.Name = poll.Name;
+                        pollHolder.Description = poll.Description;
+                        _context.Update(pollHolder);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -201,9 +206,14 @@ namespace CSD412ProjectGroup00000100.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var poll = await _context.Polls.FindAsync(id);
-            _context.Polls.Remove(poll);
-            await _context.SaveChangesAsync();
+            Poll poll = await _context.Polls.FindAsync(id);
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+            if (poll.User == user)
+            {
+                _context.Polls.Remove(poll);
+                await _context.SaveChangesAsync();
+                
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -229,8 +239,14 @@ namespace CSD412ProjectGroup00000100.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StateConfirmed(int id)
         {
-            _context.Polls.Find(id).State = true;
-            await _context.SaveChangesAsync();
+            Poll poll = await _context.Polls.FindAsync(id);
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+            if (poll.User == user)
+            {
+                _context.Polls.Find(id).State = true;
+                await _context.SaveChangesAsync();
+                
+            }
             return RedirectToAction(nameof(Index));
         }
         private bool PollExists(int id)
