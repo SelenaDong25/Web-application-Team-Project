@@ -30,7 +30,7 @@
     </dl>
 </div>
 <div>
-    <a asp-controller="Items" asp-action="ViewPollItems" asp-route-pollId="@Model.CurrentPoll.PollId">ViewItems</a> |
+    <a asp-controller="Items" asp-action="ViewPollItems" asp-route-pollId="@Model.CurrentPoll.PollId">View Items</a> |
     <a asp-action="AllPolls">Back to All Polls</a> |
     <a asp-action="Index">Back to My Polls</a> |
     @if (@Model.CurrentPoll.State == false)
@@ -82,7 +82,7 @@
                     }
                     else
                     {
-                        // add the percentage of votes per item
+                        // TODO add the percentage of votes per item 
                     }
                 </td>
             </tr>
