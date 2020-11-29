@@ -68,14 +68,26 @@ namespace CSD412ProjectGroup00000100.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool goodTOGO = true;
+                
                 ApplicationUser user = await _userManager.GetUserAsync(User);
                 
-                Item itemHolder = await _context.Items.FindAsync(vote.ItemId);
+                Item itemHolder = _context.Items.Find(vote.ItemId);
 
-                Poll pollHolder = await _context.Polls.FindAsync(itemHolder.PollId);
+                Poll pollHolder = _context.Polls.Find(itemHolder.PollId);
 
-                IQueryable<Vote> otherVotes = _context.Votes.Include(p => p.Item).Where(x => x.Voter == user && x.Item == itemHolder);             
-                if ( pollHolder.State == true && (!otherVotes.Any()))
+                IQueryable<Item> itemList = _context.Items.Where(x=>x.PollId == itemHolder.PollId);
+
+                foreach (Item item in itemList)
+                {
+                    IQueryable<Vote> otherVotes = _context.Votes.Include(p => p.Item).Where(x => x.Voter == user && x.Item == item);
+                    if (otherVotes.Any())
+                    { 
+                        goodTOGO = false;
+                        break;
+                    }
+                }
+                if ( pollHolder.State == true && (goodTOGO))
                 {
                     vote.Voter = user;
                     vote.VoteDateTime = DateTime.Now;
