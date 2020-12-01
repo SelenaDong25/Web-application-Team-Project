@@ -23,9 +23,21 @@ namespace CSD412ProjectGroup00000100.API
 
         // GET: api/Polls
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Poll>>> GetPolls()
+        public async Task<ActionResult<IEnumerable<ApiPoll>>> GetPolls()
         {
-            return await _context.Polls.ToListAsync();
+            IEnumerable < Poll > someList = await _context.Polls.ToListAsync();
+            List<ApiPoll> apiList = new List<ApiPoll>();
+            foreach(Poll poll in someList)
+            {
+                ApiPoll apiPoll = new ApiPoll();
+                apiPoll.Name = poll.Name;
+                apiPoll.Description = poll.Description;
+                apiPoll.PollId = poll.PollId;
+                apiPoll.Items = poll.Items;
+                apiList.Add(apiPoll);
+            }
+
+            return apiList;
         }
 
         // GET: api/Polls/5
