@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CSD412ProjectGroup00000100.Data;
 using CSD412ProjectGroup00000100.Models;
+using System.Text.Json.Serialization;
 
 namespace CSD412ProjectGroup00000100.API
 {
@@ -23,9 +24,29 @@ namespace CSD412ProjectGroup00000100.API
 
         // GET: api/Polls
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Poll>>> GetPolls()
+        public async Task<ActionResult<IEnumerable<ApiPoll>>> GetPolls()
         {
-            return await _context.Polls.ToListAsync();
+            IEnumerable < Poll > someList = await _context.Polls.ToListAsync();
+            List<ApiPoll> apiList = new List<ApiPoll>();
+            foreach(Poll poll in someList)
+            {
+                ApiPoll apiPoll = new ApiPoll();
+                apiPoll.Name = poll.Name;
+                apiPoll.Description = poll.Description;
+                apiPoll.PollId = poll.PollId;
+                apiPoll.Items = poll.Items;
+                //IEnumerable<Item> itemList = await _context.Items.Where(x => x.PollId == poll.PollId).ToListAsync();
+                //List<Item> items = new List<Item>();
+                //foreach (Item item in itemList)
+                //{
+                //    items.Add(item);
+                //}
+                //apiPoll.Items = (ICollection<Item>)itemList;
+
+                apiList.Add(apiPoll);
+            }
+
+            return apiList;
         }
 
         // GET: api/Polls/5
