@@ -14,8 +14,9 @@ namespace ProjectTests
         }
 
         [Theory]
-
+        [InlineData(0, 0)]
         [InlineData(37, 37)]
+        [InlineData(20000000, 20000000)]
         public void Test2(int vID, int expected)
         {
             Vote v = new Vote();
