@@ -76,7 +76,7 @@ namespace CSD412ProjectGroup00000100.Controllers
 
                 Poll pollHolder = _context.Polls.Find(itemHolder.PollId);
 
-                IQueryable<Item> itemList = _context.Items.Where(x=>x.PollId == itemHolder.PollId);
+                List<Item> itemList = _context.Items.Where(x=>x.PollId == itemHolder.PollId).ToList();
 
                 foreach (Item item in itemList)
                 {
