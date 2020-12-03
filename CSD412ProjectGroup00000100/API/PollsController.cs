@@ -36,14 +36,6 @@ namespace CSD412ProjectGroup00000100.API
                 apiPoll.Description = poll.Description;
                 apiPoll.PollId = poll.PollId;
                 apiPoll.Items = poll.Items;
-                //IEnumerable<Item> itemList = await _context.Items.Where(x => x.PollId == poll.PollId).ToListAsync();
-                //List<Item> items = new List<Item>();
-                //foreach (Item item in itemList)
-                //{
-                //    items.Add(item);
-                //}
-                //apiPoll.Items = (ICollection<Item>)itemList;
-
                 apiList.Add(apiPoll);
             }
 
