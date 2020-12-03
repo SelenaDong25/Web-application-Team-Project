@@ -1,0 +1,7 @@
+Team Vyters: Ben Carpenter, Olga Sydorchuk, Selena Dong, Aiden O'Conner, Christian Raines
+
+Testing Plan
+
+Our initial testing plan was to ensure that the methods to initialize each of our
+objects functioned as expected. We also wanted to ensure that when setting data to
+our objects, that these functions behaved as expected as well.
