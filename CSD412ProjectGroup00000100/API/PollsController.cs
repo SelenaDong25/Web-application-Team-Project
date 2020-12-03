@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CSD412ProjectGroup00000100.Data;
 using CSD412ProjectGroup00000100.Models;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSD412ProjectGroup00000100.API
 {
@@ -113,6 +114,7 @@ namespace CSD412ProjectGroup00000100.API
 
         // DELETE: api/Polls/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Poll>> DeletePoll(int id)
         {
             var poll = await _context.Polls.FindAsync(id);
