@@ -51,7 +51,7 @@ namespace CSD412ProjectGroup00000100.API
 
         // GET: api/Polls/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Poll>> GetPoll(int id)
+        public async Task<ActionResult<ApiPoll>> GetPoll(int id)
         {
             var poll = await _context.Polls.FindAsync(id);
 
@@ -59,8 +59,12 @@ namespace CSD412ProjectGroup00000100.API
             {
                 return NotFound();
             }
-
-            return poll;
+            ApiPoll getApiPool = new ApiPoll();
+            getApiPool.Name = poll.Name;
+            getApiPool.Description = poll.Description;
+            getApiPool.PollId = poll.PollId;
+            getApiPool.Items = poll.Items;
+            return getApiPool;
         }
 
         // PUT: api/Polls/5
