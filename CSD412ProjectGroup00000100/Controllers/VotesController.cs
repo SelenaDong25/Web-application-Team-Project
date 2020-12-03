@@ -72,9 +72,9 @@ namespace CSD412ProjectGroup00000100.Controllers
                 
                 ApplicationUser user = await _userManager.GetUserAsync(User);
                 
-                Item itemHolder = _context.Items.Find(vote.ItemId);
+                Item itemHolder = await _context.Items.FindAsync(vote.ItemId);
 
-                Poll pollHolder = _context.Polls.Find(itemHolder.PollId);
+                Poll pollHolder = await _context.Polls.FindAsync(itemHolder.PollId);
 
                 IQueryable<Item> itemList = _context.Items.Where(x=>x.PollId == itemHolder.PollId);
 
